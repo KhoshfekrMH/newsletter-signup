@@ -10,6 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
+//#region mainSignPage ("/")
 app.get("/", function (req,res) {
    res.sendFile(__dirname + "/signup.html");
 });
@@ -57,6 +58,19 @@ app.post("/" , function (req,res) {
    request.write(jsonData);
    request.end();
 });
+//#endregion
+
+//#region SuccessPage ("/SuccessPage")
+app.post("/success", function (req,res) {
+   res.redirect("/");
+});
+//#endregion
+
+//#region FailurePage ("/failure")
+app.post("/failure", function (req,res) {
+   res.redirect("/")
+});
+//#endregion
 
 app.listen(3000 , function () {
    console.log("Server is running on port 3000");
